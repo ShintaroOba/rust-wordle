@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "wordle"
+name = "rust-wordle"
 version = "0.1.0"
