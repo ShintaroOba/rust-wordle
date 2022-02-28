@@ -1,7 +1,5 @@
 use std::{fs, io};
 
-const WORD_LENGTH: i32 =5; 
-const MAX_ATTEMPTS: i32 = 6;
 
 /// The reader retrieve all words from csv-file.
 /// 
@@ -14,13 +12,13 @@ pub fn read_from_txt() -> Result<String, io::Error> {
     Ok(content)
 }
 
-/// The reader accepts input from stdin.
+/// The reader accepts input from std-in.
 /// 
-pub fn read_from_stdin() {//-> //Vec<String> {
+pub fn read_from_stdin() -> String {
     println!("Enter your guess word:");
+    let mut input = String::new();
     
-    // receive a word from stdin as String. 
-    io::stdin().read_line(&mut String::new()).expect("Input validation error.");
-
+    io::stdin().read_line(&mut input).expect("Input validation error.");
+    input
 
 }
