@@ -14,13 +14,13 @@ pub fn read_from_txt() -> Result<String, io::Error> {
     Ok(content)
 }
 
-/// The reader accepts input from std-in.
+/// The reader accepts input from stdin.
 /// 
 pub fn read_from_stdin() {//-> //Vec<String> {
-    let mut input = String::new();
-    print!("Enter your guess word:");
-    io::stdin().read_line(&mut input).expect("Input validation error.");
-    println!("input val: {}", input);
+    println!("Enter your guess word:");
+    
+    // receive a word from stdin as String. 
+    io::stdin().read_line(&mut String::new()).expect("Input validation error.");
 
 
 }
