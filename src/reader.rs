@@ -1,4 +1,4 @@
-use std::{fs, io};
+use std::{fs, io::{self, Write}};
 
 
 /// The reader retrieve all words from csv-file.
@@ -15,7 +15,8 @@ pub fn read_from_txt() -> Result<String, io::Error> {
 /// The reader accepts input from std-in.
 /// 
 pub fn read_from_stdin() -> String {
-    println!("Enter your guess word:");
+    print!("Enter your guess word:");
+    io::stdout().flush().unwrap();
     let mut input = String::new();
     
     io::stdin().read_line(&mut input).expect("Input validation error.");

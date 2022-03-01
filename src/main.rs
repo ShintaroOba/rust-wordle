@@ -6,5 +6,5 @@ const MAX_ATTEMPTS: i32 = 6;
 fn main() {
     // TODO: for文でMAX_ATTEMPS文ループ回す
     let input = reader::read_from_stdin();
-    let content = reader::read_from_txt();
+    let content = reader::read_from_txt().unwrap();
 }
