@@ -1,4 +1,4 @@
-use char_research::Answer;
+use char_research::{Answer, Guess};
 
 mod char_research;
 mod reader;
@@ -15,7 +15,7 @@ fn main() {
 
 
     let answer = Answer::new("WORDLE");
-    answer.research();
-
+    let guess = Guess::new("GUESS");
+    char_research::assert(&guess, &answer);
 
 }
