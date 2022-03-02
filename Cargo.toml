@@ -3,3 +3,6 @@ name = "rust-wordle"
 version = "0.1.0"
 edition = "2021"
 authors = ["Shintaro Oba <mr.shintaro3@gmail.com>"]
+
+[dependencies]
+colored = "2.0.0"
