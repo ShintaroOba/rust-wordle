@@ -1,4 +1,5 @@
-use colored::{Colorize, ColoredString};
+use colored::{ColoredString, Colorize};
+
 /// An value object that holds a correct answer inside.
 pub struct Answer {
     target_word: String,
@@ -24,13 +25,17 @@ pub enum Color {
 }
 
 impl Color {
-    fn decorate_word(&self, str: &str) -> ColoredString{
-        match self{
-            GREEN =>str.on_truecolor(152, 216, 105).black(),
-            YELLOW => str.on_truecolor(247, 225, 150).black(),
-            GRAY =>str.on_truecolor(111, 114, 121).white()
+    fn decorate_word(&self, str: &str) -> ColoredString {
+        match self {
+            GREEN => Self::add_brank(str).on_truecolor(152, 216, 105).black(),
+            YELLOW => Self::add_brank(str).on_truecolor(247, 225, 150).black(),
+            GRAY => Self::add_brank(str).on_truecolor(111, 114, 121).white(),
         }
-        
+    }
+
+    // TODO: 気持ち悪いので直したい
+    pub fn add_brank(str: &str) -> String {
+        String::from(" ") + &str.to_string() + &String::from(" ")
     }
 }
 
@@ -55,9 +60,21 @@ impl Guess {
 // 探索を行うメソッド
 pub fn assert(guess_word: &Guess, target_word: &Answer) {
     let guess_word = guess_word.internal_word();
-    /// 各Charごとに一致を確認する。
-    /// TODO: 各Indexごとに正解（〇）、不正解（×）、位置ずれ（△）を保持するObjectを作成する
+
+    let mut index = 0;
+    let mut ret: Vec<Color> = vec![];
     for x in guess_word.chars() {
         println!("word_array: {:?}", x);
+        let mut target = target_word.internal_word();
+
+        // xがAnswerと位置・文字が等しかった場合
+        if x == target.chars().nth(index).unwrap() {
+            ret.push(Color::GREEN);
+            break;
+        // xがtargetにContainの場合、黄色を格納
+        } else {
+        }
+
+        index += 1;
     }
 }
