@@ -4,5 +4,5 @@ This is Wordle (for terminal) written in Rust
 
 # Running 
 ````bash 
-cargo run
+$ cargo run
 ````
