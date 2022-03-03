@@ -1,8 +1,7 @@
 use rand::Rng;
-use word::{Answer, Color, Guess};
+use word::{Answer, Guess};
 mod reader;
 mod word;
-use colored::{ColoredString, Colorize};
 
 const WORD_LENGTH: i32 = 5;
 const MAX_ATTEMPTS: i32 = 6;
@@ -10,16 +9,26 @@ const MAX_ATTEMPTS: i32 = 6;
 fn main() {
     /// TODO: ランダムに正解となる単語を決定する
     /// TODO: for文でMAX_ATTEMPS文ループ回す
-    //  let input = reader::read_from_stdin();
+    let mut input = String::new();
+
+    while {
+        input = reader::read_from_stdin();
+        input.trim().len() != 5
+    } {
+        if input.trim().len() != 5 {
+            println!("Guess word must be 5 characters.");
+        }
+    }
+    let guess = Guess::new(&input);
+
     let random_word = get_random_word();
 
     let answer = Answer::new(&random_word);
     println!("Answer: {:?}", &answer);
 
-    let guess = Guess::new("SSSSS");
+    //let guess = Guess::new("SSSSS");
     let word_vec = word::assert(&guess, &answer);
     for (i, val) in word_vec.iter().enumerate() {
-
         // VOが保有する文字列からi文字目のcharを取得
         let char = &guess.internal_word().chars().nth(i).unwrap();
         let colored_str = val.decorate_word(&char.to_string());
