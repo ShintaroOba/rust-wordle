@@ -12,10 +12,11 @@ fn main() {
     let mut input = String::new();
 
     while {
-        input = reader::read_from_stdin();
-        input.trim().len() != 5
+        // 改行コードをtrim
+        input = reader::read_from_stdin().trim().to_string();
+        input.len() != 5
     } {
-        if input.trim().len() != 5 {
+        if input.len() != 5 {
             println!("Guess word must be 5 characters.");
         }
     }
@@ -24,7 +25,6 @@ fn main() {
     let random_word = get_random_word();
 
     let answer = Answer::new(&random_word);
-    println!("Answer: {:?}", &answer);
 
     //let guess = Guess::new("SSSSS");
     let word_vec = word::assert(&guess, &answer);
