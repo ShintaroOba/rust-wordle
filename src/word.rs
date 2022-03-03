@@ -66,26 +66,17 @@ pub fn assert(guess_word: &Guess, target_word: &Answer) -> Vec<Color> {
 
     let mut index = 0;
     let mut ret: Vec<Color> = vec![];
-    println!("ret: {:?}", &ret);
     for x in guess_word.chars() {
-        println!("start assert!");
         let target = target_word.internal_word();
-        println!("my: {}, answer: {}", x, target.chars().nth(index).unwrap());
 
-        // xがAnswerと位置・文字が等しかった場合
+        // xがAnswerと位置・文字が等しい場合
         if x == target.chars().nth(index).unwrap() {
-            println!("this time GREEN");
             ret.push(Color::GREEN);
-            println!("ret: {:?}", &ret);
         // xがtargetにContainの場合、黄色を格納
         } else if target.contains(&x.to_string()) {
-            println!("this time YELLOW");
             ret.push(Color::YELLOW);
-            println!("ret: {:?}", &ret);
         } else {
-            println!("this time GRAY");
             ret.push(Color::GRAY);
-            println!("ret: {:?}", &ret);
         }
 
         index += 1;
