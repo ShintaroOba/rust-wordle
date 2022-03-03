@@ -6,3 +6,6 @@ This is Wordle (for terminal) written in Rust
 ````bash 
 $ cargo run
 ````
+
+Official Wordle is below:  
+https://www.nytimes.com/games/wordle/index.html
