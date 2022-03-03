@@ -25,12 +25,12 @@ fn main() {
     let random_word = get_random_word();
 
     let answer = Answer::new(&random_word);
+    println!("Answer word is: {:?}", &answer);
 
-    //let guess = Guess::new("SSSSS");
     let word_vec = word::assert(&guess, &answer);
     for (i, val) in word_vec.iter().enumerate() {
         // VOが保有する文字列からi文字目のcharを取得
-        let char = &guess.internal_word().chars().nth(i).unwrap();
+        let char = &guess.internal_val().chars().nth(i).unwrap();
         let colored_str = val.decorate_word(&char.to_string());
         print!("{}", colored_str); // dont remove
     }

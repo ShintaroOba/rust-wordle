@@ -14,7 +14,7 @@ impl Answer {
         }
     }
 
-    pub fn internal_word(&self) -> String {
+    pub fn internal_val(&self) -> String {
         self.target_word.clone()
     }
 }
@@ -55,19 +55,19 @@ impl Guess {
         }
     }
 
-    pub fn internal_word(&self) -> String {
+    pub fn internal_val(&self) -> String {
         self.guess_word.clone()
     }
 }
 
 // 探索を行うメソッド
 pub fn assert(guess_word: &Guess, target_word: &Answer) -> Vec<Color> {
-    let guess_word = guess_word.internal_word();
+    let guess_word = guess_word.internal_val();
 
     let mut index = 0;
     let mut ret: Vec<Color> = vec![];
     for x in guess_word.chars() {
-        let target = target_word.internal_word();
+        let target = target_word.internal_val();
 
         // xがAnswerと位置・文字が等しい場合
         if x == target.chars().nth(index).unwrap() {

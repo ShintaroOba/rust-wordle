@@ -17,7 +17,7 @@ pub fn read_from_txt() -> Result<String, io::Error> {
 /// The reader accepts input from std-in.
 ///
 pub fn read_from_stdin() -> String {
-    print!("Enter your guess word:");
+    print!("Enter your guess word: ");
     io::stdout().flush().unwrap();
     let mut input = String::new();
 
