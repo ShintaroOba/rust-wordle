@@ -9,7 +9,7 @@ impl Answer {
     // factory method
     pub fn new(target_word: &str) -> Self {
         Answer {
-            target_word: target_word.to_string(),
+            target_word: target_word.to_string().to_uppercase(),
         }
     }
 
@@ -18,6 +18,7 @@ impl Answer {
     }
 }
 
+#[derive(Debug)]
 pub enum Color {
     GREEN,
     YELLOW,
@@ -25,11 +26,11 @@ pub enum Color {
 }
 
 impl Color {
-    fn decorate_word(&self, str: &str) -> ColoredString {
+    pub fn decorate_word(&self, str: &str) -> ColoredString {
         match self {
-            GREEN => Self::add_brank(str).on_truecolor(152, 216, 105).black(),
-            YELLOW => Self::add_brank(str).on_truecolor(247, 225, 150).black(),
-            GRAY => Self::add_brank(str).on_truecolor(111, 114, 121).white(),
+            Color::GREEN => Self::add_brank(&str).on_truecolor(152, 216, 105).black(),
+            Color::YELLOW => Self::add_brank(&str).on_truecolor(247, 225, 150).black(),
+            Color::GRAY => Self::add_brank(&str).on_truecolor(111, 114, 121).white(),
         }
     }
 
@@ -48,7 +49,7 @@ impl Guess {
     // factory method
     pub fn new(guess_word: &str) -> Self {
         Guess {
-            guess_word: guess_word.to_string(),
+            guess_word: guess_word.to_string().to_uppercase(),
         }
     }
 
@@ -58,23 +59,28 @@ impl Guess {
 }
 
 // 探索を行うメソッド
-pub fn assert(guess_word: &Guess, target_word: &Answer) {
+pub fn assert(guess_word: &Guess, target_word: &Answer) -> Vec<Color> {
     let guess_word = guess_word.internal_word();
 
     let mut index = 0;
     let mut ret: Vec<Color> = vec![];
     for x in guess_word.chars() {
-        println!("word_array: {:?}", x);
-        let mut target = target_word.internal_word();
+        let target = target_word.internal_word();
 
         // xがAnswerと位置・文字が等しかった場合
         if x == target.chars().nth(index).unwrap() {
             ret.push(Color::GREEN);
-            break;
+            continue;
         // xがtargetにContainの場合、黄色を格納
+        } else if target.contains(&x.to_string()) {
+            ret.push(Color::GREEN);
+            continue;
         } else {
+            ret.push(Color::GRAY);
         }
 
         index += 1;
     }
+    ret
 }
+

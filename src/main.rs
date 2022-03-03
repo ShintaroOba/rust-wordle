@@ -1,7 +1,7 @@
-use colored::{ColoredString, Colorize};
-use word::{Answer, Guess};
+use word::{Answer, Color, Guess};
 mod reader;
 mod word;
+use colored::{ColoredString, Colorize};
 
 const WORD_LENGTH: i32 = 5;
 const MAX_ATTEMPTS: i32 = 6;
@@ -13,21 +13,13 @@ fn main() {
     let content = reader::read_from_txt().unwrap();
 
     let answer = Answer::new("WORDLE");
-    let guess = Guess::new("GUESS");
-    word::assert(&guess, &answer);
-
-    // GREEN
-    print!("{}", " W ".on_truecolor(152, 216, 105).black());
-    print!("{}", " O ".on_truecolor(152, 216, 105).black());
-
-    // YELLOW
-    print!("{}", " R ".on_truecolor(247, 225, 150).black());
-    print!("{}", " D ".on_truecolor(247, 225, 150).black());
-    // GRAY
-    print!("{}", " L ".on_truecolor(111, 114, 121).white());
-    print!("{}", " E ".on_truecolor(111, 114, 121).white());
+    let guess = Guess::new("WISDOM");
+    let word_vec = word::assert(&guess, &answer);
+    for (i, val) in word_vec.iter().enumerate() {
+        let char = &guess.internal_word().chars().nth(i).unwrap();
+        let colored_str = val.decorate_word(&char.to_string());
+        print!("{}", colored_str);
+    }
 }
 
-fn display(){
-    
-}
+fn display() {}
