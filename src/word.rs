@@ -83,4 +83,3 @@ pub fn assert(guess_word: &Guess, target_word: &Answer) -> Vec<Color> {
     }
     ret
 }
-

@@ -1,3 +1,4 @@
+use rand::Rng;
 use word::{Answer, Color, Guess};
 mod reader;
 mod word;
@@ -10,8 +11,7 @@ fn main() {
     /// TODO: ランダムに正解となる単語を決定する
     /// TODO: for文でMAX_ATTEMPS文ループ回す
     //  let input = reader::read_from_stdin();
-    let content = reader::read_from_txt().unwrap();
-
+    let random_word = get_random_word();
     let answer = Answer::new("WORDLE");
     let guess = Guess::new("WISDOM");
     let word_vec = word::assert(&guess, &answer);
@@ -22,4 +22,16 @@ fn main() {
     }
 }
 
-fn display() {}
+fn get_random_word() -> String {
+    let contents = reader::read_from_txt().unwrap();
+    let contents_vec = contents
+        .rsplit(',')
+        .into_iter()
+        .map(|s: &str| s.to_string())
+        .collect::<Vec<String>>();
+
+    let num: usize = rand::thread_rng().gen_range(0..contents_vec.len() as u32) as usize;
+    let unwrap_str = contents_vec.get(num).unwrap();
+
+    unwrap_str.to_string()
+}
