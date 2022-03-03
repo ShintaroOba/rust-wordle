@@ -12,12 +12,17 @@ fn main() {
     /// TODO: for文でMAX_ATTEMPS文ループ回す
     //  let input = reader::read_from_stdin();
     let random_word = get_random_word();
-    let answer = Answer::new("WORDLE");
-    let guess = Guess::new("WISDOM");
+
+    let answer = Answer::new(&random_word);
+    println!("Answer: {:?}", &answer);
+
+    let guess = Guess::new("SSSSS");
     let word_vec = word::assert(&guess, &answer);
+    println!("assert result: {:?}", word_vec);
     for (i, val) in word_vec.iter().enumerate() {
         let char = &guess.internal_word().chars().nth(i).unwrap();
         let colored_str = val.decorate_word(&char.to_string());
+        println!("colored: {:?}", colored_str);
         print!("{}", colored_str);
     }
 }
