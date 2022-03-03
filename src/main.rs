@@ -19,6 +19,8 @@ fn main() {
     let guess = Guess::new("SSSSS");
     let word_vec = word::assert(&guess, &answer);
     for (i, val) in word_vec.iter().enumerate() {
+
+        // VOが保有する文字列からi文字目のcharを取得
         let char = &guess.internal_word().chars().nth(i).unwrap();
         let colored_str = val.decorate_word(&char.to_string());
         print!("{}", colored_str); // dont remove
@@ -27,14 +29,15 @@ fn main() {
 
 fn get_random_word() -> String {
     let contents = reader::read_from_txt().unwrap();
-    let contents_vec = contents
+    let contents_vec: Vec<String> = contents
         .rsplit(',')
         .into_iter()
         .map(|s: &str| s.to_string())
         .collect::<Vec<String>>();
 
-    let num: usize = rand::thread_rng().gen_range(0..contents_vec.len() as u32) as usize;
-    let unwrap_str = contents_vec.get(num).unwrap();
+    // vecサイズからから任意のIndexを指定し、その要素をvecから取得する
+    let random_num: usize = rand::thread_rng().gen_range(0..contents_vec.len() as u32) as usize;
+    let unwrap_str = contents_vec.get(random_num).unwrap();
 
     unwrap_str.to_string()
 }

@@ -27,6 +27,7 @@ pub enum Color {
 }
 
 impl Color {
+    // 文字のカラーリングをします。
     pub fn decorate_word(&self, str: &str) -> ColoredString {
         match self {
             Color::GREEN => Self::add_brank(&str).on_truecolor(152, 216, 105).black(),
@@ -35,7 +36,6 @@ impl Color {
         }
     }
 
-    // TODO: 気持ち悪いので直したい
     pub fn add_brank(str: &str) -> String {
         String::from(" ") + &str.to_string() + &String::from(" ")
     }
