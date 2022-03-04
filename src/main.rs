@@ -8,9 +8,9 @@ const MAX_ATTEMPTS: i32 = 6;
 
 fn main() {
     let mut attemps = 0;
-
+    let random_word = get_random_word();
+    let answer = Answer::new(&random_word);
     while attemps < MAX_ATTEMPTS {
-        //let input = stdin();
         let mut input = String::new();
         while {
             // 改行コードをtrim
@@ -23,8 +23,8 @@ fn main() {
             }
         }
         let guess = Guess::new(&input);
-        let random_word = get_random_word();
-        let answer = Answer::new(&random_word);
+        
+        println!("Answer word is : {:?}", answer);
         string_play(&guess, &answer);
         attemps += 1;
     }
