@@ -19,7 +19,7 @@ impl Answer {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Color {
     GREEN,
     YELLOW,

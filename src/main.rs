@@ -1,5 +1,10 @@
+use std::process::exit;
+
 use rand::Rng;
 use word::{Answer, Guess};
+
+use crate::word::Color;
+
 mod reader;
 mod word;
 
@@ -10,7 +15,10 @@ fn main() {
     let mut attemps = 0;
     let random_word = get_random_word();
     let answer = Answer::new(&random_word);
+    println!("anwer:{:?}", answer);
     while attemps < MAX_ATTEMPTS {
+
+        #[warn(unused_assignments)]
         let mut input = String::new();
         while {
             // 改行コードをtrim
@@ -26,10 +34,14 @@ fn main() {
         string_play(&guess, &answer);
         attemps += 1;
     }
+    println!("Answer is: {:?}", answer.internal_val());
 }
 
 fn string_play(guess: &Guess, answer: &Answer) {
     let word_vec = word::assert(&guess, &answer);
+    
+
+    // word_vecのカラー通りに文字列を装飾
     for (i, val) in word_vec.iter().enumerate() {
         // VOが保有する文字列からi文字目のcharを取得
         let char = &guess.internal_val().chars().nth(i).unwrap();
@@ -37,6 +49,11 @@ fn string_play(guess: &Guess, answer: &Answer) {
         print!("{}", colored_str); // dont remove
     }
     println!(""); // dont remove
+
+    if word_vec.iter().all(|color| color == &Color::GREEN) {
+        println!("Correct! Conguraturations!");
+        exit(0);
+    }
 }
 fn get_random_word() -> String {
     // read words from csv file
