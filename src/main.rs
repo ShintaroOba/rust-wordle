@@ -23,8 +23,6 @@ fn main() {
             }
         }
         let guess = Guess::new(&input);
-        
-        println!("Answer word is : {:?}", answer);
         string_play(&guess, &answer);
         attemps += 1;
     }
@@ -38,7 +36,7 @@ fn string_play(guess: &Guess, answer: &Answer) {
         let colored_str = val.decorate_word(&char.to_string());
         print!("{}", colored_str); // dont remove
     }
-    println!("");// dont remove
+    println!(""); // dont remove
 }
 fn get_random_word() -> String {
     // read words from csv file
