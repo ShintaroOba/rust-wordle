@@ -15,7 +15,6 @@ fn main() {
     let mut attemps = 0;
     let random_word = get_random_word();
     let answer = Answer::new(&random_word);
-    println!("anwer:{:?}", answer);
     while attemps < MAX_ATTEMPTS {
 
         #[warn(unused_assignments)]
