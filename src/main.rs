@@ -50,7 +50,7 @@ fn string_play(guess: &Guess, answer: &Answer) {
     println!(""); // dont remove
 
     if word_vec.iter().all(|color| color == &Color::GREEN) {
-        println!("Correct! Conguraturations!");
+        println!("Correct! Congraturations!");
         exit(0);
     }
 }
